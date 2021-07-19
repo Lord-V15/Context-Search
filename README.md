@@ -12,6 +12,6 @@ Here is an example work of the Entity Recognition :
 
 Here is an example of how the APIs work (of course, everything is done on localhost) :
 
-<img width="500" alt="Screenshot 2021-07-18 at 6 44 28 PM" src="https://user-images.githubusercontent.com/46837998/126068379-7fd5f0d2-0a3d-4f45-a40c-ea1134ac9372.png">
+<img width="500" alt="Screenshot 2021-07-18 at 6 44 28 PM" src="https://user-images.githubusercontent.com/46837998/126154941-ca2536da-73a5-40c6-9b0e-296d7fada001.png">
 
-<img width="900" alt="Screenshot 2021-07-18 at 6 39 56 PM" src="https://user-images.githubusercontent.com/46837998/126068236-3ad39431-00b3-4114-9ea3-e82b061a9c4a.png">
+<img width="900" alt="Screenshot 2021-07-19 at 5 11 16 PM" src="https://user-images.githubusercontent.com/46837998/126154980-d953159c-fbb6-4e1b-83a7-cc9957b85997.png">
