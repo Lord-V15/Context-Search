@@ -11,6 +11,7 @@ modification history
 from fastapi import APIRouter, HTTPException, Depends
 import json
 import timeit
+import datetime
 from pydantic import BaseModel
 
 from .preprocessing import preprocess
@@ -38,7 +39,7 @@ def intelligent_search_using_NER(item: Query):
     print('Time taken to run NER :  ', stop - start)
     
     start = timeit.default_timer()
-    brand, colour, shipping, rating = None, None, None, None
+    brand, colour, shipping, rating, latest = None, None, None, None, None
     for i in response.body[0]['extractions']:
         search_term = search_term.replace(i['extracted_text'],"") 
         # Save every entity if found
@@ -50,16 +51,20 @@ def intelligent_search_using_NER(item: Query):
             shipping=i['extracted_text']
         elif i['tag_name']=='Rating':
             rating=i['extracted_text'][0]
+    for i in query.split():
+        if i.lower()=='latest' :
+            search_term = search_term.replace(i,"")
+            latest = str(datetime.date.today().year)
     if prices['gte_flag']:
         search_term = search_term.replace(prices['gte_amount']+"$","")
     if prices['lte_flag']:
         search_term = search_term.replace(prices['lte_amount']+"$","")
-    search_term = preprocess(search_term, stopword=True)
+    search_term = preprocess(search_term, stem=False)
     stop = timeit.default_timer()
     print('Time taken to get Search Terms :  ', stop - start)
     
     start = timeit.default_timer()
-    output = es_search(search_term,prices,brand,rating,shipping,colour)
+    output = es_search(search_term,prices,brand,rating,shipping,colour,latest)
     stop = timeit.default_timer()
     print('Time to get results :  ', stop - start)
     

@@ -37,16 +37,17 @@ def price_filter(string):
     greater = ['more than','above','over','higher than'] # filter keywords
     smaller = ['less than','below','under','lower than'] # filter keywords
     lte, gte, lte_amount, gte_amount=False, False, None, None
-    for i in greater :
-        if i in string : # if keyword found in query
-            gte = True
-            pos = re.search(i,string).span() # Search for position of keyword
-            gte_amount = amount(string[pos[1]:]) # Find amount ahead of the keyword 
-            break
-    for i in smaller :
-        if i in string : # if keyword found in query
-            lte = True
-            pos = re.search(i,string).span() # Search for position of keyword
-            lte_amount = amount(string[pos[1]:]) # Find amount ahead of the keyword 
-            break
+    for i in string.split() :
+        for j in greater:
+            if i == j : # if keyword found in query
+                gte = True
+                pos = re.search(i,string).span() # Search for position of keyword
+                gte_amount = amount(string[pos[1]:]) # Find amount ahead of the keyword 
+                break
+        for j in smaller :
+            if i == j : # if keyword found in query
+                lte = True
+                pos = re.search(i,string).span() # Search for position of keyword
+                lte_amount = amount(string[pos[1]:]) # Find amount ahead of the keyword 
+                break
     return { 'gte_flag':gte, 'gte_amount':gte_amount, 'lte_flag':lte, 'lte_amount':lte_amount}

@@ -2,7 +2,7 @@ import elasticsearch
 from elasticsearch import Elasticsearch
 es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
 
-def es_search(search_term,prices,brand,rating,shipping,colour):
+def es_search(search_term,prices,brand,rating,shipping,colour,latest):
     # AVAILABLE FILTERS : BRAND, COLOUR, FREE SHIPPING, RATING & PRICE RANGE
     filters = []
     if prices['gte_flag']:
@@ -19,6 +19,10 @@ def es_search(search_term,prices,brand,rating,shipping,colour):
     musts = [{ "match": {"name": search_term} }]
     if colour is not None:
         musts.append({ "match": {"name": colour} })
+    if latest is not None:
+        musts.append({ "match": {"name": latest} })
+    # if [brand, colour, shipping, rating, latest] == [None, None, None, None, None]:
+    #     musts.append({ "match": {"description": search_term}})
     body = {"query": {"bool": {"must": musts, # to show must needed results
                            "filter": filters # to show relevant results
                            }     }    }  
