@@ -1,4 +1,4 @@
-# Context-Search
+# Context-Search   [![CodeFactor](https://www.codefactor.io/repository/github/lord-v15/context-search/badge)](https://www.codefactor.io/repository/github/lord-v15/context-search)
 This repository contains the following :
 - A Jupyter Notebook in which I carried out most of my tasks (the first draft).
 - The dataset I worked with, both in the original and processed forms.
